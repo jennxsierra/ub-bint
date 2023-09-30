@@ -1,0 +1,5 @@
+# Ignore .idea folder (JetBrains IDE settings)
+.idea/
+
+# Ignore cmake-build-debug folder (CMake build artifacts)
+cmake-build-debug/
