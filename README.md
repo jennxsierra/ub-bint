@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ub-bint</title>
-  <style>
-    body {
-      font-family: 'VT323', monospace;
-    }
-  </style>
-</head>
-
-<body>
-
 # ub-bint
 
 [![Last Commit](https://img.shields.io/github/last-commit/jennxsierra/ub-bint?style=plastic&color=blue)](https://github.com/jennxsierra/ub-bint)
@@ -65,7 +49,3 @@ This repository is organized by semesters, courses, and weeks. Here's how you ca
 ## License
 
 This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details.
-
-  </body>
-
-</html>
