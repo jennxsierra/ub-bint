@@ -1,51 +1,146 @@
+/* Positioning and Box Model */
 body {
-    font-family: 'Orbitron', sans-serif;
-    background-color: #111;
-    color: #000;
-    overflow: hidden;
+    font-family: Merriweather, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.resume {
-    position: relative;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 40px;
-    background-color: #f5f5dc; /* Cream eggshell background */
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.6); /* White shadow with reduced opacity */
+/* Sidebar Styles */
+.sidebar {
+    font-size: 14px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #23395D;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Profile Image Styles */
+.profile-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* Contact Info Styles */
+.contact-info ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.contact-info ul li {
+    margin-bottom: 10px;
+}
+
+/* Social Links Styles */
+.social-links {
+    margin-top: auto;
+    margin-bottom: 30px;
+    display: flex;
+}
+
+.social-links a {
+    color: white;
+    margin: 5px 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.social-links a i {
+    font-size: 24px;
+}
+
+/* Content Container Styles */
+.content {
+    margin-left: 220px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    transform: translateY(50px);
-    opacity: 0;
-    animation: fadeIn 1.5s forwards 1.5s; /* Slower floating animation */
 }
 
-@keyframes fadeIn {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+/* Entry Styles */
+.entry ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
 }
 
-.header h1 {
-    color:  #7a506f; /* Very dark steel blue */
-    font-size: 1.8em;
+.entry li {
+    color: black;
     margin-bottom: 10px;
 }
 
-.header p {
-    color: #000; /* Black color for "University Student" */
+/* Headings Styles */
+h1 {
+    margin: 0;
 }
 
-.accent-text {
-    color: #7a506f;
-    font-size: 1.5em;
+h2 {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+/* Section Styles */
+.section {
+    display: flex;
+    align-items: baseline;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Icon Styles */
+.icon {
+    margin-right: 10px; /* Adjusted margin */
+}
+
+.section h3 {
+    margin: 0;
+    font-size: 18px; /* Adjusted font size to match your previous styles */
+    text-align: left;
+}
+
+.section-content {
+    max-width: 700px;
+    width: 100%;
+}
+
+/* Skill Styles */
+.skill {
     margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.content p {
-    margin-bottom: 10px;
+.skill-name {
+    width: 120px;
+    text-align: left;
+}
+
+.skill-bar {
+    flex: 1; /* Allow the skill bars to flexibly grow */
+    height: 20px;
+}
+
+.skill-level {
+    height: 20px;
+    background-color: #203354;
 }

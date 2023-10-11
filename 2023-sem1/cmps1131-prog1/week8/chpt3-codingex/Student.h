@@ -8,34 +8,34 @@ class Student {
 private:
     string firstName;
     string lastName;
-    int examGrade1;
-    int examGrade2;
-    int examGrade3;
+    int examGrade1{};
+    int examGrade2{};
+    int examGrade3{};
 
 public:
     // Constructor
     Student(string fName, string lName, int grade1, int grade2, int grade3);
 
     // Getter and Setter functions for first name
-    string getFirstName();
+    [[nodiscard]] string getFirstName() const;
     void setFirstName(string fName);
 
     // Getter and Setter functions for last name
-    string getLastName();
+    [[nodiscard]] string getLastName() const;
     void setLastName(string lName);
 
     // Getter and Setter functions for exam grades
-    int getExamGrade1();
-    void setExamGrade1(int grade);
+    [[nodiscard]] int getExamGrade1() const;
+    void setExamGrade1(int grade1);
 
-    int getExamGrade2();
-    void setExamGrade2(int grade);
+    [[nodiscard]] int getExamGrade2() const;
+    void setExamGrade2(int grade2);
 
-    int getExamGrade3();
-    void setExamGrade3(int grade);
+    [[nodiscard]] int getExamGrade3() const;
+    void setExamGrade3(int grade3);
 
     // Function to calculate and return the average of exam grades
-    double getAverage();
+    [[nodiscard]] double getAverage() const;
 };
 
 #endif // STUDENT_H

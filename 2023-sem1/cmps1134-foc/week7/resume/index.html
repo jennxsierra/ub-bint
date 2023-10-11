@@ -4,35 +4,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <title>Jennessa Sierra - Resume</title>
+    <title>Jennessa Sierra's Resume</title>
 </head>
 
 <body>
-<div class="resume">
-    <div class="header">
-        <h1>Jennessa Sierra</h1>
-        <p>University Student</p>
+    <div class="sidebar">
+        <div class="profile-image">
+            <img src="me.jpg" alt="Jennessa Sierra">
+        </div>
+        <div class="contact-info">
+            <ul>
+                <li><i class="fas fa-map-marker-alt"></i> Belmopan, Belize</li>
+                <li><i class="fas fa-phone"></i> 628-7042</li>
+                <li><i class="fas fa-envelope"></i> jennxsierra@gmail.com</li>
+            </ul>
+        </div>
+        <div class="social-links">
+            <a href="https://github.com/jennxsierra"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/jennxsierra/"><i class="fab fa-linkedin"></i></a>
+        </div>
     </div>
+
     <div class="content">
-        <h2 class="accent-text">Contact Information</h2>
-        <p>Email: jenn@email.com</p>
-        <p>Phone: (123) 456-7890</p>
+        <h1>Jennessa Sierra</h1>
+        <h2>University Student</h2>
 
-        <h2 class="accent-text">Education</h2>
-        <p>B.Sc. in Information Technology </p>
-        <p>University of Belize, 2023 - Present </p>
-        <p> Expected Graduation: June 2027</p>
+        <section class="section">
+            <div class="icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="section-content">
+                <h3>Education</h3>
+                <div class="entry">
+                    <ul>
+                        <li><p class="entry-university">University of Belize</p>
+                            <p class="entry-year">2023 - Present</p>
+                            <p class="entry-degree">Bachelor's Degree in Information Technology</p>
+                        </li>
+                        <li><p class="entry-university">Saint John's College Junior College</p>
+                            <p class="entry-year">2017 - 2019</p>
+                            <p class="entry-degree">Associate's Degree in Biology and Chemistry</p>
+                        </li>
+                        <li><p class="entry-university">San Pedro High School</p>
+                            <p class="entry-year">2013 - 2017</p>
+                            <p class="entry-degree">High School Diploma</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-        <h2 class="accent-text">Skills</h2>
-        <p>C++, HTML, CSS, JavaScript</p>
+        <section class="section">
+            <div class="icon">
+                <i class="fas fa-laptop-code"></i>
+            </div>
+            <div class="section-content">
+                <h3>Skills & Expertise</h3>
+                <div class="skill-bar">
+                    <div class="skill">
+                        <div class="skill-name">C++</div>
+                        <div class="skill-level" style="width: 75%;"></div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">HTML/CSS</div>
+                        <div class="skill-level" style="width: 50%;"></div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">JavaScript</div>
+                        <div class="skill-level" style="width: 30%;"></div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Python</div>
+                        <div class="skill-level" style="width: 20%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <h2 class="accent-text">Experience</h2>
-        <p>Amateur Programmer, University of Belize, 2023 - Present</p>
-        <p>Worked on various projects, using C++, HTML, CSS, JavaScript</p>
     </div>
-</div>
+
 </body>
 
 </html>
