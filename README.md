@@ -1,7 +1,7 @@
 # ub-bint
 
 [![Last Commit](https://img.shields.io/github/last-commit/jennxsierra/ub-bint?style=plastic&color=blue)](https://github.com/jennxsierra/ub-bint)
-[![wakatime](https://wakatime.com/badge/user/784f2cc4-fc95-4999-a214-1dcf7be5d55b/project/69f36dfc-085a-4496-868c-b4833df0a0af.svg?style=plastic&color=blue)](https://wakatime.com/badge/user/784f2cc4-fc95-4999-a214-1dcf7be5d55b/project/69f36dfc-085a-4496-868c-b4833df0a0af)
+[![wakatime](https://wakatime.com/badge/github/jennxsierra/ub-bint.svg?style=plastic&color=blue)](https://wakatime.com/badge/github/jennxsierra/ub-bint)
 [![GitHub](https://img.shields.io/github/license/jennxsierra/ub-bint?style=plastic&color=blue)](https://github.com/jennxsierra/ub-bint/blob/main/LICENSE)
 
 This repository serves as a documentation of my journey through UB's Information Technology program. It's a practical, hands-on account of my experiences in coding and IT projects. From tackling coding challenges to exploring various programming languages, it's a raw and unfiltered view of my growth as a programmer. No frills, just real progress.
