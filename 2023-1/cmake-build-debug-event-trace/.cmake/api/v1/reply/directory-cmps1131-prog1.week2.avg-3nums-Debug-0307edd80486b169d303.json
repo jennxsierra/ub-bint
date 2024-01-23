@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "cmps1131-prog1/week2/avg-3nums",
+		"source" : "cmps1131-prog1/week2/avg-3nums"
+	}
+}

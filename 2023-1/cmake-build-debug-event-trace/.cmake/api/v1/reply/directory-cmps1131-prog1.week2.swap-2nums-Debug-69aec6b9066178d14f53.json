@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "cmps1131-prog1/week2/swap-2nums",
+		"source" : "cmps1131-prog1/week2/swap-2nums"
+	}
+}
