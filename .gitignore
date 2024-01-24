@@ -5,4 +5,4 @@
 cmake-build-debug/
 
 #Ignore CMakelists.txt file
-CMakeLists.txt/
+CMakeLists.txt
