@@ -4,5 +4,5 @@
 # Ignore cmake-build-debug folder (CMake build artifacts)
 cmake-build-debug/
 
-#Ignore CMakelists.txt file
-CMakeLists.txt
+#Ignore CMakelists.txt files in all directories
+**/CMakeLists.txt

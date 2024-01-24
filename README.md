@@ -20,7 +20,7 @@ This repository serves to chronicle my experiences and projects during my time i
 
 ## File Structure
 
-- **Semester 1**
+- **2023-1**
     - **cmps1131-prog1**
         - **week1**
             - Project files for Week 1.
