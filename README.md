@@ -11,7 +11,6 @@ This repository serves as a documentation of my journey through UB's Information
 - [About](#about)
 - [File Structure](#file-structure)
 - [Navigating Semesters, Courses, and Weeks](#navigating-semesters-courses-and-weeks)
-- [Getting the Most Out of the Repository](#getting-the-most-out-of-the-repository)
 - [License](#license)
 
 ## About
@@ -20,31 +19,27 @@ This repository serves to chronicle my experiences and projects during my time i
 
 ## File Structure
 
-- **2023-1**
-    - **cmps1131-prog1**
-        - **week1**
-            - Project files for Week 1.
-        - **week2**
-            - Project files for Week 2.
-        - ...
-    - **cmps1134-foc**
-        - **week1**
-            - Project files for Week 1.
-        - ...
+Folders are divided by semester, course, and assessment type.
 
-### Navigating Semesters, Courses, and Weeks
+- `2023-1` Fall Semester (August 2023 to December 2023)
+    - `[cmps1131]` Principles of Programming 1
+    - `[cmps1134]` Fundamentals of Computing
+- `2023-2` Spring Semester (January 2024 to May 2024)
+    - `[cmps1232]` Principles of Programming 2
+- `2024-1` Fall Semester (August 2024 to December 2024)
+- `2024-2` Spring Semester (January 2025 to May 2025)
+- `2025-1` Fall Semester (August 2025 to December 2025)
+- `2025-2` Spring Semester (January 2026 to May 2026)
+- `2026-1` Fall Semester (August 2026 to December 2026)
+- `2026-2` Spring Semester (January 2027 to May 2027)
 
-This repository is organized by semesters, courses, and weeks. Here's how you can navigate through the structure:
+### Navigating Semesters, Courses, and Assessments
 
-- **Semester X**: Click on the respective semester folder to explore the courses undertaken during that semester.
-- **Course Name**: Inside each semester folder, find individual course folders. Each course folder contains weekly projects and assignments.
-- **Week X**: Inside each course folder, explore specific week folders. These folders contain project files, notes, and other materials related to that week's coursework.
+This repository is organized by semesters, courses, and assessment type. Here's how you can navigate through the structure:
 
-### Getting the Most Out of the Repository
-
-- **Code Samples**: Explore the code samples to understand different programming concepts and techniques.
-- **Project Work**: Find detailed project documentation and source code inside each week's folder.
-- **Notes**: Look for any notes or documents that provide additional context or explanations for the projects.
+- **20XX-X**: Click on the respective semester folder to explore the courses undertaken during that semester.
+- **Course Name**: Inside each semester folder, find individual course folders. Each course folder contains assignments and assessments.
+- **Assessment Type**: Inside each course folder, explore different types of assessment folders. These folders contain project files, assignments, and other materials related to the coursework.
 
 ## License
 

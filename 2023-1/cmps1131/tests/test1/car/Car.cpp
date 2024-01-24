@@ -1,4 +1,4 @@
-#include "car.h"
+#include "Car.h"
 
 Car::Car(float newPrice) {
     setPrice(newPrice);
