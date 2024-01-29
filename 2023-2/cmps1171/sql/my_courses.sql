@@ -6,5 +6,7 @@ CREATE TABLE my_courses (
     created_at timestamp(0) with time zone NOT NULL DEFAULT NOW()
 );
 
-INSERT INTO my_courses (course_id)
-VALUES ('CMPS3162');
+INSERT INTO
+    my_courses (course_id)
+VALUES
+    ('CMPS3162');
