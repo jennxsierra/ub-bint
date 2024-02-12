@@ -1,12 +1,10 @@
--- This table stores my stocks
-
 DROP TABLE IF EXISTS STOCKS;
 
-CREATE TABLE STOCKS (
-    ID SERIAL PRIMARY KEY,
-    SYMBOL TEXT NOT NULL,
-    NUM_SHARES INT,
-    DATE_ACQUIRED DATE
+CREATE TABLE stocks (
+    id SERIAL PRIMARY KEY,
+    symbol TEXT NOT NULL,
+    num_shares INT NOT NULL,
+    date_acquired DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
-\copy stocks (symbol, num_shares, date_acquired) FROM './stocks.txt' DELIMITER ',';
+--\copy stocks (symbol, num_shares, date_acquired) FROM './stocks.txt' DELIMITER ',';
