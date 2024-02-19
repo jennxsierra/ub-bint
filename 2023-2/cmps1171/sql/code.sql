@@ -95,3 +95,4 @@ FROM
 WHERE
     C1.name = 'Introduction to Databases'
     AND C2.name = 'Fundamentals of Computing';
+
