@@ -2,7 +2,9 @@
 
 const int rows = 50;
 const int columns = 3;
-int arr[rows][columns] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+int arr[rows][columns] = {{1,2, 3},
+                          {4, 5, 6},
+                          {7, 8, 9}};
 
 void printLastRow(int [rows][columns], int, int);
 void sumArray(int [rows][columns], int, int);
