@@ -1,17 +1,17 @@
 # ub-bint
 
-[![Last Commit](https://img.shields.io/github/last-commit/jennxsierra/ub-bint?style=plastic&color=blue)](https://github.com/jennxsierra/ub-bint)
-[![wakatime](https://wakatime.com/badge/github/jennxsierra/ub-bint.svg?style=plastic&color=blue)](https://wakatime.com/badge/github/jennxsierra/ub-bint)
-[![GitHub](https://img.shields.io/github/license/jennxsierra/ub-bint?style=plastic&color=blue)](https://github.com/jennxsierra/ub-bint/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/jennxsierra/ub-bint?style=plastic&color=36454f)](https://github.com/jennxsierra/ub-bint)
+[![wakatime](https://wakatime.com/badge/github/jennxsierra/ub-bint.svg?style=plastic&color=36454f)](https://wakatime.com/badge/github/jennxsierra/ub-bint)
+[![GitHub](https://img.shields.io/github/license/jennxsierra/ub-bint?style=plastic&color=36454f)](https://github.com/jennxsierra/ub-bint/blob/main/LICENSE)
 
 This repository serves as a documentation of my journey through UB's Information Technology program. It's a practical, hands-on account of my experiences in coding and IT projects. From tackling coding challenges to exploring various programming languages, it's a raw and unfiltered view of my growth as a programmer. No frills, just real progress.
 
 ## Table of Contents
 
-- [About](#about)
-- [File Structure](#file-structure)
-- [Navigating Semesters, Courses, and Weeks](#navigating-semesters-courses-and-weeks)
-- [License](#license)
+- [About](##about)
+- [File Structure](##file-structure)
+- [Navigating Semesters, Courses, and Assessments](##navigating-semesters-courses-and-assessments)
+- [License](##license)
 
 ## About
 
@@ -33,7 +33,7 @@ Folders are divided by semester, course, and assessment type.
 - `2026-1` Fall Semester (August 2026 to December 2026)
 - `2026-2` Spring Semester (January 2027 to May 2027)
 
-### Navigating Semesters, Courses, and Assessments
+## Navigating Semesters, Courses, and Assessments
 
 This repository is organized by semesters, courses, and assessment type. Here's how you can navigate through the structure:
 
