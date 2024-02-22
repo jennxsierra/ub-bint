@@ -8,10 +8,10 @@ This repository serves as a documentation of my journey through UB's Information
 
 ## Table of Contents
 
-- [About](##about)
-- [File Structure](##file-structure)
-- [Navigating Semesters, Courses, and Assessments](##navigating-semesters-courses-and-assessments)
-- [License](##license)
+- [About](#about)
+- [File Structure](#file-structure)
+- [Navigating Semesters, Courses, and Assessments](#navigating-semesters-courses-and-assessments)
+- [License](#license)
 
 ## About
 
