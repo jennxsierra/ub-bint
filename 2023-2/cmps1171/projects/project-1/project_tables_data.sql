@@ -19,9 +19,9 @@ DROP ROLE IF EXISTS music;
 CREATE ROLE music WITH LOGIN PASSWORD '$swordfish$';
 
 -- psql@16 only - grant privileges to music user as postgres superuser
--- \c music
--- GRANT ALL PRIVILEGES ON SCHEMA public TO music;
--- \c music music
+\c music
+GRANT ALL PRIVILEGES ON SCHEMA public TO music;
+\c music music
 
 /* CREATE TABLES */
 
@@ -107,12 +107,12 @@ VALUES
     ('Jane', 'Smith', 'f', '2001-02-10', 'Pop', '34 Mango Street', 1, '633-7787', 'janesmith@gmail.com'),
     ('Mark', 'Johnson', 'm', '1995-05-15', 'Rock', '56 Mahogany Street', 3, '633-4567', 'markjohnson@gmail.com'),
     ('Emily', 'Davis', 'f', '1998-09-20', 'Jazz', '78 Haulover Creek Street', 2, '633-9876', 'emilydavis@gmail.com'),
-    ('Michael', 'Wilson', 'm', '1990-12-03', 'Hip Hop', '90 Blue Hole Street', 5, '633-2345', 'michaelwilson@gmail.com'),
+    ('Michael', 'Wilson', 'o', '1990-12-03', 'Hip Hop', '90 Blue Hole Street', 5, '633-2345', 'michaelwilson@gmail.com'),
     ('Sarah', 'Anderson', 'f', '1993-07-08', 'R&B', '12 Mariposa Avenue', 6, '633-8765', 'sarahanderson@gmail.com'),
     ('David', 'Taylor', 'm', '1988-03-25', 'Classical', '45 Hummingbird Drive', 1, '633-5432', 'davidtaylor@gmail.com'),
     ('Olivia', 'Thomas', 'f', '1997-11-12', 'Pop', '67 Mountaine View Boulevard', 4, '633-7654', 'oliviathomas@gmail.com'),
     ('Daniel', 'Brown', 'm', '1992-06-18', 'Rock', '89 Rose Garden Street', 2, '633-3210', 'danielbrown@gmail.com'),
-    ('Sophia', 'Clark', 'f', '1994-04-05', 'Country', '23 Cardinal Avenue', 3, '633-6789', 'sophiaclark@gmail.com');
+    ('Sophia', 'Clark', 'f', '1994-04-05', 'Country', '23 Cardinal Avenue', 2, '633-6789', 'sophiaclark@gmail.com');
     
 
 
@@ -125,30 +125,33 @@ VALUES
     ('Ambergris Stadium', 'Barrier Reef Drive', 6, 1000, false, '822-8765'),
     ('Dangriga Cultural Center', 'St. Vincent Street', 5, 300, false, '822-2345'),
     ('Orange Walk Town Hall', 'Queen Victoria Avenue', 2, 400, false, '822-7890'),
-    ('Punta Gorda Sports Complex', 'Front Street', 6, 800, false, '822-5432'),
+    ('Stann Creek Sports Complex', 'Front Street', 5, 800, true, '822-5432'),
     ('Benque Viejo Del Carmen Community Center', 'San Jose Street', 4, 250, false, '822-9876'),
     ('Corozal Civic Center', '7th Avenue', 1, 600, false, '822-3210');
     
 
+-- some shows don't offer VIP tickets, indicated by NULL values
 INSERT INTO shows (name, venue, start_date, end_date, price, description, tickets, vip_tickets)
 VALUES
     ('Love Day Fest', 5, '2024-02-14', '2024-02-14', 15000.00, 'Celebrate Valentine''s Day with love!', 150, 15),
     ('Spring Fling', 3, '2024-03-30', '2024-03-31', 75000.00, 'Celebrate the arrival of spring with this lively event.', 750, 75),
     ('Easter Beach Party', 9, '2024-04-16', '2024-04-16', 35000.00, 'Enjoy a fun-filled day at the beach this Easter.', 350, 35),
     ('Summer Crash', 1, '2024-06-01', '2024-06-03', 50000.00, 'Experience the ultimate summer fun at this event.', 500, 50),
-    ('Carnival', 10, '2024-09-10', '2024-09-12', 60000.00, 'Join the festivities and excitement of a carnival.', 600, 60),
+    ('Carnival', 10, '2024-09-10', '2024-09-12', 60000.00, 'Join the festivities and excitement of a carnival.', 600, NULL),
     ('Fall Fest', 4, '2024-09-25', '2024-09-30', 25000.00, 'Celebrate the beauty of fall at this festival.', 250, 25),
-    ('Independence Day Celebration', 7, '2024-09-21', '2024-09-21', 30000.00, 'Celebrate Independence Day with patriotic spirit.', 300, 30),
-    ('Halloween Bazaar', 6, '2024-10-31', '2024-10-31', 20000.00, 'Experience a spooky and fun-filled Halloween event.', 200, 20),
+    ('Independence Day Celebration', 7, '2024-09-21', '2024-09-21', 30000.00, 'Celebrate Independence Day with patriotic spirit.', 300, NULL),
+    ('Halloween Bazaar', 8, '2024-10-31', '2024-10-31', 20000.00, 'Experience a spooky and fun-filled Halloween event.', 200, 20),
     ('Garifuna Settlement Day', 8, '2024-11-19', '2024-11-19', 40000.00, 'Celebrate the Garifuna culture and heritage on this special day.', 400, 40),
-    ('Winter Wonderland', 2, '2024-12-23', '2024-12-25', 100000.00, 'Experience the magic of winter at this holiday event.', 1000, 100);
+    ('Winter Wonderland', 2, '2024-12-23', '2024-12-25', 100000.00, 'Experience the magic of winter at this holiday event.', 1000, 100),
+    ('New Years Bash', 2, '2024-12-30', '2025-01-01', 70000.00, 'Start the new year with a party!', 900, NULL);
+
 
 INSERT INTO performances (show_id, artist_id)
 VALUES
     (1, 1),
     (1, 2),
     (2, 3),
-    (2, 4),
+    (3, 4),
     (3, 5),
     (3, 6),
     (4, 7),
@@ -156,13 +159,12 @@ VALUES
     (5, 9),
     (5, 10),
     (6, 1),
-    (6, 2),
+    (7, 2),
     (7, 3),
     (7, 4),
     (8, 5),
     (8, 6),
-    (9, 7),
+    (8, 7),
     (9, 8),
     (10, 9),
-    (10, 10);
-    
+    (11, 10);
