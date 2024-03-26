@@ -18,31 +18,76 @@ CREATE DATABASE project;
 DROP ROLE IF EXISTS project;
 CREATE ROLE project WITH LOGIN PASSWORD '#swordfish#';
 
--- psql@16 only - grant privileges to project user as postgres superuser
-\c project
+-- psql@15+ only - grant privileges to project user as postgres superuser
+\c project postgres
 GRANT ALL PRIVILEGES ON SCHEMA public TO project;
 \c project project
 
 /* CREATE TABLES */
 
 -- drop existing tables
-DROP TABLE IF EXISTS student_parent CASCADE;
+DROP TABLE IF EXISTS addresses CASCADE;
+DROP TABLE IF EXISTS districts CASCADE;
+DROP TABLE IF EXISTS parent_student CASCADE;
 DROP TABLE IF EXISTS students CASCADE;
 DROP TABLE IF EXISTS parents CASCADE;
 DROP TABLE IF EXISTS classrooms CASCADE;
 DROP TABLE IF EXISTS buildings CASCADE;
 DROP TABLE IF EXISTS teachers CASCADE;
 
+-- BUILDINGS and CLASSROOMS
+
 CREATE TABLE buildings (
     building_id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL
+    name TEXT NOT NULL,
+    classroom_capacity INT NOT NULL
 );
 
 CREATE TABLE classrooms (
     classroom_id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
+    has_projector BOOL NOT NULL,
     building INT NOT NULL,
     FOREIGN KEY (building) REFERENCES buildings (building_id)
+);
+
+-- TEACHERS, PARENTS and STUDENTS
+
+CREATE TABLE districts (
+    name TEXT PRIMARY KEY
+);
+
+CREATE TABLE addresses (
+    address_id SERIAL PRIMARY KEY,
+    address TEXT NOT NULL,
+    district TEXT,
+    FOREIGN KEY (district) REFERENCES districts (name)
+);
+
+CREATE TABLE teachers (
+    teacher_id SERIAL PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    gender CHAR(1) NOT NULL CHECK (gender IN ('m', 'f', 'o')),
+    salary NUMERIC(8, 2) NOT NULL,
+    contact_phone TEXT NOT NULL,
+    contact_email TEXT NOT NULL,
+    address INT, -- assume one main address
+    FOREIGN KEY (address) REFERENCES addresses (address_id)
+);
+
+-- parents table also include guardians
+-- only one parent of student is needed for record, but can add more than one record
+CREATE TABLE parents (
+    parent_id SERIAL PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    gender CHAR(1) NOT NULL CHECK (gender IN ('m', 'f', 'o')),
+    profession TEXT NOT NULL,
+    contact_phone TEXT NOT NULL,
+    contact_email TEXT NOT NULL,
+    address INT, -- assume one main address
+    FOREIGN KEY (address) REFERENCES addresses (address_id)
 );
 
 CREATE TABLE students (
@@ -50,98 +95,143 @@ CREATE TABLE students (
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
     date_of_birth DATE NOT NULL,
-    address TEXT NOT NULL,
-    classroom INT NOT NULL,
+    gender CHAR(1) NOT NULL CHECK (gender IN ('m', 'f', 'o')),
+    graduated DATE, -- NULL value indicates student has not graduated yet
+    address INT,
+    classroom INT NOT NULL, -- a preschool student only belongs to one classroom
+    FOREIGN KEY (address) REFERENCES addresses (address_id),
     FOREIGN KEY (classroom) REFERENCES classrooms (classroom_id)
 );
 
-CREATE TABLE parents (
-    parent_id SERIAL PRIMARY KEY,
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
-    address TEXT NOT NULL,
-    phone TEXT NOT NULL
-);
-
-CREATE TABLE teachers (
-    teacher_id SERIAL PRIMARY KEY,
-    first_name TEXT NOT NULL,
-    last_name TEXT NOT NULL,
-    address TEXT NOT NULL,
-    phone TEXT NOT NULL
-);
-
 -- linking table to indicate many-to-many relationship between students and parents
-CREATE TABLE student_parent (
-    student_id INT NOT NULL,
+CREATE TABLE parent_student (
     parent_id INT NOT NULL,
-    PRIMARY KEY (student_id, parent_id),
-    FOREIGN KEY (student_id) REFERENCES students (student_id),
-    FOREIGN KEY (parent_id) REFERENCES parents (parent_id)
+    student_id INT NOT NULL,
+    PRIMARY KEY (parent_id, student_id),
+    FOREIGN KEY (parent_id) REFERENCES parents (parent_id),
+    FOREIGN KEY (student_id) REFERENCES students (student_id)
 );
 
 /* INSERT DATA */
 
-INSERT INTO buildings (name)
+INSERT INTO buildings (name, classroom_capacity)
 VALUES
-    ('George Price'),
-    ('Dean Barrow');
+    ('George Price', 30),
+    ('Dean Barrow', 35);
 
-INSERT INTO classrooms (name, building)
+INSERT INTO classrooms (name, has_projector, building)
 VALUES
-    ('Toucan', 1),
-    ('Tapir', 1),
-    ('Mahogany', 2),
-    ('Black Orchid', 2);
+    ('Toucan', true, 1),
+    ('Tapir', false, 1),
+    ('Mahogany', true, 2),
+    ('Black Orchid', false, 2);
 
-INSERT INTO students (first_name, last_name, date_of_birth, address, classroom)
+INSERT INTO districts
 VALUES
-    ('Miguel', 'Vasquez', '2018-05-15', '26 Canada Hill St, Belmopan', 1),
-    ('Maria', 'Guerrero', '2017-11-20', '45 Orange St, Belmopan', 2),
-    ('Michael', 'Flowers', '2019-03-10', '17 Hibiscus St, Belmopan', 3),
-    ('Sandra', 'Castillo', '2018-09-25', '9 Unity Blvd, Belmopan', 4),
-    ('David', 'Brown', '2017-07-01', '13 Toucan Ave, Belmopan', 1),
-    ('Martha', 'Reyes', '2019-12-12', '11 Power Ln, Belmopan', 2),
-    ('Daniel', 'Garcia', '2018-02-28', '15 Trinity Blvd, Belmopan', 3),
-    ('Olivia', 'Young', '2019-06-18', '19 Constitution Dr, Belmopan', 4),
-    ('Matthew', 'Neal', '2017-10-05', '24 Tapir Ave, Belmopan', 1),
-    ('Sophia', 'Usher', '2018-08-22', '46 Mayflower St, Belmopan', 2);
+    ('Corozal'),
+    ('Orange Walk'),
+    ('Belize'),
+    ('Cayo'),
+    ('Stann Creek'),
+    ('Dangriga');
 
-INSERT INTO parents (first_name, last_name, address, phone)
+INSERT INTO addresses (address, district)
 VALUES
-    ('Jorge', 'Vasquez', '26 Canada Hill St, Belmopan', '555-1234'),
-    ('Alissa', 'Guerrero', '45 Orange St, Belmopan', '555-5678'),
-    ('Thomas', 'Flowers', '17 Hibiscus St, Belmopan', '555-9012'),
-    ('Karen', 'Castillo', '9 Unity Blvd, Belmopan', '555-3456'),
-    ('Frank', 'Brown', '13 Toucan Ave, Belmopan', '555-7890'),
-    ('Lisa', 'Reyes', '32 Power Ln, Belmopan', '555-2345'),
-    ('Julio', 'Garcia', '15 Trinity Blvd, Belmopan', '555-6789'),
-    ('Janet', 'Young', '19 Constitution Dr, Belmopan', '555-0123'),
-    ('Albert', 'Neal', '24 Tapir Ave, Belmopan', '555-4567'),
-    ('Ruth', 'Usher', '46 Mayflower St, Belmopan', '555-8901');
+    -- some teachers travel for work
+    ('78 Duality Blvd', 'Belize'),
+    ('45 Cardinal Ave', 'Cayo'),
+    ('12 Lion Ave', 'Belize'),
+    ('19 Dragon Ln', 'Orange Walk'),
+    ('65 Trio St', 'Cayo'),
+    ('32 Forest Dr', 'Cayo'),
+    ('15 Flowers St', 'Cayo'),
+    ('29 Macal St', 'Cayo'),
+    ('24 Macaw Ave', 'Cayo'),
+    ('46 College Blvd', 'Cayo'),
+    -- parent and students have same address
+    ('26 Canada Hill St', 'Cayo'),
+    ('45 Orange St', 'Cayo'),
+    ('17 Hibiscus St', 'Cayo'),
+    ('49 Unity Blvd', 'Cayo'),
+    ('13 Toucan Ave', 'Cayo'),
+    ('11 Power Ln', 'Cayo'),
+    ('15 Trinity Blvd', 'Cayo'),
+    ('19 Constitution Dr', 'Cayo');
 
-INSERT INTO teachers (first_name, last_name, address, phone)
+INSERT INTO teachers (first_name, last_name, gender, salary, contact_phone, contact_email, address)
 VALUES
-    ('Kieran', 'Ryan', '78 Trinity Blvd, Belmopan', '555-2468'),
-    ('David', 'Garcia', '45 Cardinal Ave, Belmopan', '555-1357'),
-    ('Vernelle', 'Sylvester', '12 Tiger Ave, Belmopan', '555-9630'),
-    ('Amilcar', 'Umana', '19 Power Ln, Belmopan', '555-7421'),
-    ('Manuel', 'Medina', '65 Trio St, Belmopan', '555-8532'),
-    ('Stephen', 'Sangster', '32 Forest Dr, Belmopan', '555-6974'),
-    ('Josue', 'Ake', '15 Flowers St, Belmopan', '555-3815'),
-    ('Apolonio', 'Aguilar', '29 Macal St, Belmopan', '555-2697'),
-    ('Steven', 'Lewis', '24 Macaw Ave, Belmopan', '555-1548'),
-    ('Giovanni', 'Pinelo', '46 College Blvd, Belmopan', '555-9637');
+    ('Kieran', 'Ryan', 'm', 2500.00, '555-2468', 'kryan@gmail.com', 1),
+    ('David', 'Garcia', 'm', 2200.00, '555-1357', 'dgarcia@outlook.com', 2),
+    ('Vernelle', 'Sylvester', 'f', 2200.00, '555-9630', 'vsylvester@gmail.com', 3),
+    ('Amilcar', 'Umana', 'm', 2250.00, '555-7421', 'aumana@gmail.com', 4),
+    ('Manuel', 'Medina', 'm', 2300.00, '555-8532', 'mmedina@yahoo.com', 5),
+    ('Stephen', 'Sangster', 'm', 2000.00, '555-6974', 'ssangster@protonmail.com', 6),
+    ('Josue', 'Ake', 'm', 2100.00, '555-3815', 'jake@icloud.com', 7),
+    ('Apolonio', 'Aguilar', 'm', 2400.00, '555-2697', 'aaguilar@hotmail.com', 8),
+    ('Steven', 'Lewis', 'm', 2350.00, '555-1548', 'slewis@gmail.com', 9),
+    ('Giovanni', 'Pinelo', 'f', 2400.00, '555-9637', 'gpinelo@gmail.com', 10);
 
-INSERT INTO student_parent (student_id, parent_id)
+INSERT INTO parents (first_name, last_name, gender, profession, contact_phone, contact_email, address)
 VALUES
-    (1, 1), (1, 2),
-    (2, 3), (2, 4),
-    (3, 5), (3, 6),
-    (4, 7), (4, 8),
-    (5, 9), (5, 10),
-    (6, 1), (6, 2),
-    (7, 3), (7, 4),
-    (8, 5), (8, 6),
-    (9, 7), (9, 8),
-    (10, 9), (10, 10);
+    ('Jorge', 'Vasquez', 'm', 'Electrician', '555-1234', 'gamer123@gmail.com', 11),
+    ('Alissa', 'Guerrero', 'f', 'Musician', '555-5678', 'aly$$aGee@gmail.com', 12),
+    ('Thomas', 'Flowers', 'm', 'Construction Worker', '555-9012', 'thomasflowers@gmail.com', 13),
+    ('Karen', 'Castillo', 'f', 'Secretary', '555-3456', 'karencastle@yahoo.com', 14),
+    ('Frank', 'Brown', 'm', 'Accountant', '555-7890', 'bfrank@gmail.com', 15),
+    ('Lisa', 'Reyes', 'f', 'Chemist', '555-2345', 'lisareyesbmp@gmail.com', 16),
+    ('Josue', 'Garcia', 'm', 'Artist', '555-6789', 'garciabest444@gmail.com', 17),
+    ('Janet', 'Garcia', 'f', 'Writer', '555-0123', 'janety@hotmail.com', 17),
+    ('Albert', 'Neal', 'm', 'Retail Clerk', '555-4567', 'nealiobert@gmail.com', 18),
+    ('Ruth', 'Neal', 'f', 'Consultant', '555-8901', 'ruthusher@gmail.com', 18);
+
+INSERT INTO students (first_name, last_name, date_of_birth, gender, graduated, address, classroom)
+VALUES
+    ('Miguel', 'Vasquez', '2019-05-15', 'm', '2023-08-01', 11, 1),
+    ('Maria', 'Guerrero', '2018-11-20', 'f', '2022-08-01', 12, 2),
+    ('Michael', 'Flowers', '2021-03-10', 'm', NULL, 13, 3),
+    ('Sandra', 'Castillo', '2020-09-25', 'f', NULL, 14, 4),
+    ('David', 'Brown', '2022-07-01', 'm', NULL, 15, 1),
+    ('Martha', 'Reyes', '2020-12-12', 'f', NULL, 16, 2),
+    ('Daniel', 'Garcia', '2020-02-28', 'm', NULL, 17, 3),
+    ('Olivia', 'Neal', '2021-06-18', 'f', NULL, 18, 4),
+    ('Matthew', 'Neal', '2021-10-05', 'm', NULL, 18, 1),
+    ('Sophia', 'Neal', '2021-08-22', 'f', NULL, 18, 2);
+
+INSERT INTO parent_student (parent_id, student_id)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
+    (6, 6),
+    (7, 7),
+    (8, 7),
+    (9, 8), (9, 9), (9, 10),
+    (10, 8), (10, 9), (10, 10);
+
+/* DISPLAY ALL TABLES */
+
+SELECT *
+FROM buildings;
+
+SELECT *
+FROM classrooms;
+
+SELECT *
+FROM districts;
+
+SELECT *
+FROM addresses;
+
+SELECT *
+FROM teachers;
+
+SELECT *
+FROM parents;
+
+SELECT *
+FROM students;
+
+SELECT *
+FROM parent_student;
