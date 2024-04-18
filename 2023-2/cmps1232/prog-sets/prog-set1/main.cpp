@@ -3,9 +3,9 @@
 #include "Hangman.h"
 
 int main() {
-    std::cout << "\t+-----------------------------------------+" << std::endl;
-    std::cout << "\t| HANGMAN GAME CREATED BY JENNESSA SIERRA |" << std::endl;
-    std::cout << "\t+-----------------------------------------+\n" << std::endl;
+    std::cout << "\t\t +-----------------------------------------+" << std::endl;
+    std::cout << "\t\t | HANGMAN GAME CREATED BY JENNESSA SIERRA |" << std::endl;
+    std::cout << "\t\t +-----------------------------------------+\n" << std::endl;
 
     // prompt the user to enter their username
     std::string username;

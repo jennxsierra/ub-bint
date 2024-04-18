@@ -15,6 +15,8 @@ public:
     void setDifficultyLevel(unsigned int level);
 
     // function to get the current difficulty level of the player
+    // marked as [[nodiscard]] to indicate that the return value should not be ignored
+    // https://en.cppreference.com/w/cpp/attributes/nodiscard
     [[nodiscard]] int getDifficultyLevel() const;
 
     // function to set the username for the player
@@ -33,9 +35,9 @@ public:
     void resetGuessesArray();
 
 private:
-    int guessesArray[10]; // keeps track of the 10 most recent player scores
-    char username[20]; // stores the player's username
-    unsigned int difficultyLevel; // player's chosen difficulty level
+    int guessesArray[10]{}; // keeps track of the 10 most recent player scores
+    char username[20]{}; // stores the player's username
+    unsigned int difficultyLevel{}; // player's chosen difficulty level
     static const unsigned int MAX_DIFFICULTY_LEVEL = 3; // maximum difficulty level allowed
 };
 

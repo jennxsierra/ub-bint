@@ -213,9 +213,9 @@ void Hangman::startGame() {
     } while (playAgain);
 
     system("cls");
-    std::cout << "\t+-----------------------------------------+" << std::endl;
-    std::cout << "\t| HANGMAN GAME CREATED BY JENNESSA SIERRA |" << std::endl;
-    std::cout << "\t+-----------------------------------------+\n" << std::endl;
+    std::cout << "\t\t\t\t  +-----------------------------------------+" << std::endl;
+    std::cout << "\t\t\t\t  | HANGMAN GAME CREATED BY JENNESSA SIERRA |" << std::endl;
+    std::cout << "\t\t\t\t  +-----------------------------------------+\n" << std::endl;
 
     std::cout << R"(
           ________                __           ____                    __            _                __
@@ -226,9 +226,10 @@ void Hangman::startGame() {
                                                             /_/            /____/        /____/
     )" << std::endl;
     system("pause");
+    std::getchar();
 }
 
-void Hangman::printMessage(const std::string& message, bool printTop, bool printBottom) const {
+void Hangman::printMessage(const std::string& message, bool printTop, bool printBottom) {
     // initialize the width of the game board
     const std::size_t length = 33;
 
@@ -281,12 +282,17 @@ void Hangman::printMessage(const std::string& message, bool printTop, bool print
 }
 
 void Hangman::drawHangman(int guessCount) const {
-    const size_t hangmanPartRows = 4;
-    const size_t hangmanPartCount = 8;
-    const size_t noosePartCount = getMaxAllowedAttempts() - hangmanPartCount;
+    int printCount = 1; // used to keep track of the number of body parts to print
+    // constants to define the number of rows and body parts for the hangman
+    const int hangmanParts = 8;
+    const int hangmanRows = 4;
+    // calculate the length of the noose based on the difficulty level
+    // diffLevel 1 and 3 have maxAllowedAttempts of 10, diffLevel 2 has 13
+    const std::size_t nooseLength = getMaxAllowedAttempts() - hangmanParts;
 
-    // draws the noose
-    for (size_t i = 0; i < noosePartCount; ++i) {
+    // nooseLength for diffLevel 1 and 3 is 2
+    // nooseLength for diffLevel 2 is 5
+    for (int i = 0; i < nooseLength; ++i) {
         if (guessCount == 0) {
             printMessage("", false, false);
         } else {
@@ -295,59 +301,61 @@ void Hangman::drawHangman(int guessCount) const {
         }
     }
 
-    size_t currentPart = 1;
-
-    // draws the hangman parts
-    // prints the different hangman parts based on the current part and guess count
-    for (size_t i = 0; i < hangmanPartRows; ++i) {
-        if (currentPart <= guessCount) {
-            if (currentPart == 1) {
+    // loop to print the hangman body parts
+    // based on the number of incorrect guesses
+    for (int i = 0; i < hangmanRows; ++i) {
+        if (printCount <= guessCount) {
+            if (printCount == 1) {
                 printMessage("O", false, false);
+
                 if (guessCount == 1 || guessCount == 2) {
-                    ++currentPart;
+                    ++printCount;
                 } else if (guessCount == 3) {
-                    currentPart += 2;
+                    printCount += 2;
                 } else if (guessCount > 3) {
-                    currentPart += 3;
+                    printCount += 3;
                 }
+
                 continue;
             }
 
-            if (currentPart == 2 || currentPart == 6) {
-                printMessage("/ ", false, false);
-                ++currentPart;
+            if (printCount == 2 || printCount == 6) {
+                printMessage("/  ", false, false);
+                ++printCount;
                 continue;
             }
 
-            if (currentPart == 3) {
+            if (printCount == 3) {
                 printMessage("/| ", false, false);
-                ++currentPart;
+                ++printCount;
                 continue;
             }
 
-            if (currentPart == 4) {
-                printMessage("/|\\\\", false, false);
-                ++currentPart;
+            if (printCount == 4) {
+                printMessage("/|\\", false, false);
+                ++printCount;
                 continue;
             }
 
-            if (currentPart == 5) {
+            if (printCount == 5) {
                 printMessage(" | ", false, false);
+
                 if (guessCount == 5 || guessCount == 6) {
-                    ++currentPart;
+                    ++printCount;
                 } else if (guessCount == 7) {
-                    currentPart += 2;
+                    printCount += 2;
                 }
+
                 continue;
             }
 
-            if (currentPart == 7) {
-                printMessage("/ \\\\", false, false);
-                ++currentPart;
+            if (printCount == 7) {
+                printMessage("/ \\", false, false);
+                ++printCount;
                 continue;
             }
         } else {
-            // print empty space if no hangman part is drawn
+            // print empty lines if the player has not made any incorrect guesses
             printMessage("", false, false);
         }
     }
@@ -443,20 +451,21 @@ void Hangman::printAvailableLetters(const std::string& guessesSoFar) {
 
 bool Hangman::checkWin(std::string wordToGuess, const std::string& guessesSoFar) {
     // use transform to convert wordToGuess to uppercase
-    // https://www.cplusplus.com/reference/algorithm/transform/
     std::transform(wordToGuess.begin(), wordToGuess.end(), wordToGuess.begin(), ::toupper);
 
     // create a temporary string variable
     std::string revealedWord;
 
+    bool allLettersGuessed = true;
+
     // use a range-based for loop to iterate through the wordToGuess
-    // https://www.cplusplus.com/doc/tutorial/control/
     for (char c : wordToGuess) {
         if (guessesSoFar.find(c) != std::string::npos) {
             revealedWord += c;
             revealedWord += " ";
         } else {
             revealedWord += "_ ";
+            allLettersGuessed = false;
         }
     }
 
@@ -464,7 +473,7 @@ bool Hangman::checkWin(std::string wordToGuess, const std::string& guessesSoFar)
     printMessage(revealedWord, true, true);
 
     // if all the letters from wordToGuess have been guessed, return true
-    return wordToGuess == guessesSoFar;
+    return allLettersGuessed;
 }
 
 bool Hangman::processResults(const std::string& wordToGuess, int guessAttempts, bool hasWon) {
@@ -480,16 +489,18 @@ bool Hangman::processResults(const std::string& wordToGuess, int guessAttempts, 
 
     std::cout << "\nThe correct word was: " << wordToGuess << "\n" << std::endl;
 
-    std::cout << "    " << player.getUsername() << "'s Hangman Game Statistics:\n";
-    std::cout << "-------------------------------------\n";
+    std::cout << "      " << player.getUsername() << "'s Hangman Game Statistics:\n";
+    std::cout << "------------------------------------------\n";
 
     // generate and print statistics
     std::string statistics = player.generateStatistics();
     std::cout << statistics << std::endl;
 
-    std::cout << "-------------------------------------\n" << std::endl;
+    std::cout << "------------------------------------------\n" << std::endl;
 
-    std::cout << "NOTE: These scores reset every 10 games!\n" << std::endl;
+    std::cout << "NOTE: The lower your score, the better!\n"
+                 "These scores reset every 10 games!\n"
+                 "A perfect game won't be counted!\n" << std::endl;
 
 
     while (true) {

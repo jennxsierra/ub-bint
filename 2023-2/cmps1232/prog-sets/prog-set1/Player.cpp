@@ -63,7 +63,7 @@ void Player::setGuesses(unsigned int numGuesses) {
 
 // returns a string of the game statistics
 std::string Player::generateStatistics() {
-    std::string stats = "\t    Guesses: ";
+    std::string stats = "Incorrect Guesses: ";
     int count = 0;
     double sum = 0;
 
@@ -84,7 +84,7 @@ std::string Player::generateStatistics() {
         std::ostringstream avgStream;
         avgStream << std::fixed << std::setprecision(1) << average;
 
-        stats += "\n\tAverage Guesses: " + avgStream.str();
+        stats += "\nAverage Incorrect Guesses: " + avgStream.str();
     }
 
     return stats;

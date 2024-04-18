@@ -4,7 +4,7 @@
 #define PROG_SET1_HANGMAN_H
 
 #include "Player.h"
-#include <vector>
+#include <vector> // for std::vector
 
 class Hangman {
 public:
@@ -19,6 +19,7 @@ public:
     int selectGameLevel();
 
     // function to generate a random number within the range of the word list size
+    // marked as [[nodiscard]] to indicate that the return value should not be ignored
     [[nodiscard]] int generateRandomNumber() const;
 
     // function to select a random word from the word list using the generated random number
@@ -31,7 +32,9 @@ public:
     void startGame();
 
     // function to print a message with optional top and bottom borders
-    void printMessage(const std::string&, bool printTop, bool printBottom) const;
+    // marked as static to indicate that the function does not depend on an instance of the class
+    // https://en.cppreference.com/w/cpp/language/static
+    static void printMessage(const std::string&, bool printTop, bool printBottom) ;
 
     // function to draw the hangman ASCII art based on the guess count
     void drawHangman(int guessCount = 0) const;
@@ -40,13 +43,13 @@ public:
     void resetAvailableLetters();
 
     // function to print an ASCII message, used for "YOU WIN!" and "GAME OVER!" messages
-    void printAsciiMessage(std::string message);
+    static void printAsciiMessage(std::string message);
 
     // function to print the available letters that have not been guessed yet
     void printAvailableLetters(const std::string& guessesSoFar);
 
     // function to check if the player has won by comparing the guessed letters with the word to guess
-    bool checkWin(std::string wordToGuess, const std::string& guessesSoFar);
+    static bool checkWin(std::string wordToGuess, const std::string& guessesSoFar);
 
     // function to process the results of the game, print the game statistics, and ask the user to play again
     bool processResults(const std::string& wordToGuess, int guessAttempts, bool hasWon);
@@ -64,14 +67,14 @@ public:
     [[nodiscard]] unsigned getMaxAllowedAttempts() const;
 
     // function to calculate the number of wrong guesses made so far
-    unsigned attemptsMadeSoFar(const std::string& wordToGuess, std::string guessesSoFar);
+    static unsigned attemptsMadeSoFar(const std::string& wordToGuess, std::string guessesSoFar);
 
 private:
     Player player; // user playing the game
     std::vector<std::string> wordVector; // array of all words in the word list
-    unsigned difficultyLevel; // determines the number of attempts allowed and range of word selection
-    unsigned maxAllowedAttempts; // determined by difficultyLevel
-    char alphabetArray[ALPHABET_SIZE + 1]; // array of all alphabet letters
+    unsigned difficultyLevel{}; // determines the number of attempts allowed and range of word selection
+    unsigned maxAllowedAttempts{}; // determined by difficultyLevel
+    char alphabetArray[ALPHABET_SIZE + 1]{}; // array of all alphabet letters
 
     // ASCII representation that spells "YOU WIN!" and "GAME OVER!"
     constexpr static char G[ASCII_ROWS][ASCII_COLS] = {" ##### ", // Row=0
