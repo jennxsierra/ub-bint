@@ -176,13 +176,135 @@ VALUES
         1,
         'Eat, Sleep, Fortnite, Repeat',
         '2024-02-17 02:23:43.75342-06'
-    );
+    ),
+    (
+        'jennmay',
+        'jennymay@gmail.com',
+        'Jennifer',
+        'May',
+        2,
+        'Photography is my passion and I love capturing the beauty of the world.',
+        '2024-11-01 09:12:54.10044-06'
+    ),
+    (
+        'johnnycodes',
+        'johnsmith@gmail.com',
+        'John',
+        'Smith',
+        1,
+        'I enjoy coding and playing video games.',
+        '2024-04-12 12:00:21.00973-06'
+    ),
+    (
+        'migzmusic',
+        'miguelsanchez@gmail.com',
+        'Miguel',
+        'Sanchez',
+        1,
+        'Music is my life and I love playing the guitar.',
+        '2024-05-20 08:30:49.02370-06'
+
+    ),
+    (
+        'coolcoder123',
+        'coolcoder123@gmail.com',
+        'James',
+        'Johnson',
+        1,
+        'Just a teen who loves coding and video games. Always up for a challenge!',
+        '2024-03-12 16:37:14.73850-06'
+    ),
+    (
+        'musiclover98',
+        'musiclover98@gmail.com',
+        'Emily',
+        'Williams',
+        2,
+        'Music is my life. I play the guitar and write my own songs. Dream big!',
+        '2024-04-15 17:30:59.53214-06'
+    ),
+    (
+        'skaterboy2005',
+        'skaterboy2005@gmail.com',
+        'Michael',
+        'Brown',
+        1,
+        'Skateboarding is not just a sport, its a lifestyle. Live free, skate hard.',
+        '2024-05-18 13:42:34.25478-06'
+    ),
+    (
+        'bookwormgirl',
+        'bookwormgirl@gmail.com',
+        'Emma',
+        'Jones',
+        2,
+        'Books are my escape from reality. Love fantasy and sci-fi genres.',
+        '2024-06-20 19:17:54.36594-06'
+    ),
+    (
+        'hoopdreams',
+        'hoopdreams@gmail.com',
+        'David',
+        'Miller',
+        1,
+        'Basketball is my passion. Working hard to make the varsity team next year.',
+        '2024-07-22 09:27:34.11542-06'
+    ),
+    (
+        'artisticanna',
+        'artisticanna@gmail.com',
+        'Anna',
+        'Davis',
+        2,
+        'Art is the way I express myself. Love painting and digital art.',
+        '2024-08-24 11:45:23.95123-06'
+    ),
+    (
+        'gamingguru',
+        'gamingguru@gmail.com',
+        'Robert',
+        'Wilson',
+        1,
+        'Gaming is not just a hobby, its a way of life. Love RPGs and strategy games.',
+        '2024-09-26 22:21:34.75369-06'
+    ),
+    (
+        'dancindiva',
+        'dancindiva@gmail.com',
+        'Sophia',
+        'Thomas',
+        2,
+        'Dance is my passion. Ballet, hip-hop, contemporary - I love it all!',
+        '2024-10-28 17:30:59.11420-06'
+    ),
+    (
+        'techgeek',
+        'techgeek@gmail.com',
+        'William',
+        'Moore',
+        1,
+        'Tech enthusiast. Love building PCs and exploring new tech gadgets.',
+        '2024-11-30 20:45:34.36594-06'
+    )
+    
 
 INSERT INTO user_gender_preferences (utopia_id, gender_id)
 VALUES
     (1, 2),
     (2, 1),
-    (3, 2);
+    (3, 2),
+    (4, 1),
+    (5, 2),
+    (6, 2),
+    (7, 1),
+    (8, 1),
+    (9, 2),
+    (10, 2),
+    (11, 1),
+    (12, 2),
+    (13, 1),
+    (14, 2),
+    (15, 1);
 
 INSERT INTO user_photos (uploader_id, url, description, uploaded_at)
 VALUES
@@ -197,21 +319,117 @@ VALUES
         'https://utopiadating.bz/photo/548935',
         'At the Florida beaches relaxing in the sun.',
         '2023-10-15 16:11:04.10234-06' -- make sure this is after user creation date
+    ),
+    (
+        3,
+        'https://utopiadating.bz/photo/98124',
+        'Me and my friends at the Fortnite World Cup 2024!',
+        '2024-02-17 02:23:43.75342-06'
+    ),
+    (
+        4,
+        'https://utopiadating.bz/photo/33415',
+        'Me at the Grand Canyon, one of the most beautiful places I have visited!',
+        '2024-11-01 19:16:43.12041-06'
+    ),
+    (
+        5,
+        'https://utopiadating.bz/photo/67339',
+        'Coding till the break of dawn!',
+        '2024-04-15 07:05:21.02450-06'
+    ),
+    (
+        6,
+        'https://utopiadating.bz/photo/88541',
+        'Playing the guitar at a local concert!',
+        '2024-05-27 18:33:37.01467-06'
+    ),
+    (
+        7,
+        'https://utopiadating.bz/photo/99721',
+        'What video game should I play next?',
+        '2024-04-14 16:37:14.73850-06'
+    ),
+    (
+        8,
+        'https://utopiadating.bz/photo/52117',
+        'Picked up some new vinyls today!',
+        '2024-04-18 12:17:21.13362-06'
+    ),
+    (
+        9,
+        'https://utopiadating.bz/photo/12345',
+        'Skateboarding at the local skate park!',
+        '2024-05-22 16:58:34.94716-06'
+    ),
+    (
+        10,
+        'https://utopiadating.bz/photo/67890',
+        'Reading my favorite book series!',
+        '2024-06-23 20:11:29.25478-06'
+    ),
+    (
+        11,
+        'https://utopiadating.bz/photo/23456',
+        'Practicing my basketball shots!',
+        '2024-07-21 10:19:43.15973-06'
+    ),
+    (
+        12,
+        'https://utopiadating.bz/photo/78901',
+        'Painting a new masterpiece!',
+        '2024-08-30 14:27:23.95123-06'
+    ),
+    (
+        13,
+        'https://utopiadating.bz/photo/34567',
+        'Just won a game of Fortnite!',
+        '2024-09-29 22:31:52.55472-06'
+    ),
+    (
+        14,
+        'https://utopiadating.bz/photo/89012',
+        'Dancing the night away!',
+        '2024-10-29 21:42:34.11542-06'
+    ),
+    (
+        15,
+        'https://utopiadating.bz/photo/45678',
+        'Building my new PC!',
+        '2024-12-01 11:03:19.81662-06'
     );
 
 INSERT INTO relationship_types (relationship)
 VALUES
-    ('Romance');
+    ('Romance'),
+    ('Friendship'),
+    ('Networking');
 
 INSERT INTO user_relationship_preferences (utopia_id, relationship_id)
 VALUES
     (1, 1),
     (2, 1),
-    (3, 1);
+    (3, 1),
+    (4, 2),
+    (5, 2),
+    (6, 2),
+    (7, 3),
+    (8, 3),
+    (9, 3),
+    (10, 1),
+    (11, 1),
+    (12, 1),
+    (13, 2),
+    (14, 2),
+    (15, 2);
 
 INSERT INTO user_conversations (initiator, recipient, active, created_at, closed_at)
 VALUES
-    (1, 2, true, '2024-01-12 09:31:54.87041-06', NULL); -- make sure the times make sense and give some examples of non-active ones with closed_at values
+    (1, 2, true, '2024-01-12 09:31:54.87041-06', NULL), -- make sure the times make sense and give some examples of non-active ones with closed_at values
+    (12, 13, true, '2024-09-29 22:31:52.55472-06', NULL),
+    (3, 4, true, '2024-11-01 19:16:43.12041-06', NULL),
+    (5, 6, true, '2024-04-15 07:05:21.02450-06', NULL),
+    (7, 8, false, '2024-04-14 16:37:14.73850-06', '2024-04-18 12:17:21.13362-06'
 
 INSERT INTO user_messages (conversation_id, contents, sender, sent_at, received_at, seen_at)
 VALUES
