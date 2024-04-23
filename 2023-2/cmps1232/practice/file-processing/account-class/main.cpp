@@ -4,46 +4,67 @@
 #include "Account.h"
 
 int main() {
-    std::string accountNum;
-    double bal;
-    char choice;
+    std::ofstream outAcc("..\\AccountsData.dat", std::ios::out | std::ios::binary);
 
-    std::fstream AccFile("..\\Accounts.dat", std::ios::in | std::ios::out | std::ios::binary);
-
-    if (!AccFile) {
+    if (!outAcc) {
         std::cerr << "Error: File could not be opened." << std::endl;
         exit(1);
     }
 
-    Account objAccount;
+    Account account{};
 
     while (true) {
-        std::cout << "Enter account number: ";
-        std::cin >> accountNum;
+        std::cout << "Enter account number (N to stop): ";
+        std::string accountNum;
+        std::getline(std::cin >> std::ws, accountNum);
 
-        std::cout << "Enter balance: ";
-        std::cin >> bal;
-
-        objAccount.setAccountNumber(accountNum);
-        objAccount.setBalance(bal);
-
-        std::cout << "\nAccount number: " << objAccount.getAccountNumber() << std::endl;
-        std::cout << "Balance: " << std::fixed << std::setprecision(2) << objAccount.getBalance() << std::endl;
-
-        AccFile.seekp((std::stoi(objAccount.getAccountNumber())-1) * sizeof(Account));
-        AccFile.write(reinterpret_cast<char *>(&objAccount), sizeof(objAccount));
-
-        std::cout << "\nDo you want to enter another account? (Y/N): ";
-        std::cin >> choice;
-
-        if (choice == 'N' || choice == 'n') {
+        if (accountNum == "N" || accountNum == "n") {
             break;
         }
+
+        std::cout << "Enter balance: ";
+        double bal;
+        std::cin >> bal;
+
+        account.setAccountNumber(accountNum);
+        account.setBalance(bal);
+
+        outAcc.seekp((std::stoi(account.getAccountNumber()) - 1) * sizeof(Account));
+        outAcc.write(reinterpret_cast<char *>(&account), sizeof(account));
 
         std::cout << std::endl;
     }
 
-    AccFile.close();
+    outAcc.close();
 
-    std::cin.get();
+    // reading from the file
+    std::ifstream inAcc("..\\AccountsData.dat", std::ios::in);
+
+    if (!inAcc) {
+        std::cerr << "Error: File could not be opened." << std::endl;
+        exit(1);
+    }
+
+    Account readAccount{};
+
+    std::cout << "Enter account number to access data: ";
+    int accNum;
+    std::cin >> accNum;
+
+    inAcc.seekg((accNum - 1) * sizeof(Account));
+    inAcc.read(reinterpret_cast<char *>(&readAccount), sizeof(Account));
+
+    inAcc.close();
+
+    // writing to the file
+    std::ofstream txtAcc("..\\AccountsPrinted.txt", std::ios::out);
+
+    txtAcc << "Account number: " << readAccount.getAccountNumber() << '\n'
+    << "Balance: " << std::fixed << std::setprecision(2) << readAccount.getBalance() << std::endl;
+
+    txtAcc.close();
+
+    std::cout << "Data written to AccountsPrinted.txt" << std::endl;
+
+    system("pause");
 }
