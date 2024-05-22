@@ -1,5 +1,5 @@
-#ifndef ACCOUNT_CLASS_ACCOUNT_H
-#define ACCOUNT_CLASS_ACCOUNT_H
+#ifndef BINT_ACCOUNT_H
+#define BINT_ACCOUNT_H
 
 #include <string>
 
@@ -17,4 +17,4 @@ private:
     double balance;
 };
 
-#endif //ACCOUNT_CLASS_ACCOUNT_H
+#endif //BINT_ACCOUNT_H
